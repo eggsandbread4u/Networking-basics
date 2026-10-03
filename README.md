@@ -1,10 +1,14 @@
-# Networking-basics
+# Networking Fundamentals and Traffic Analysis
 
-I will be documenting some basic networking fundamentals, how they work, why they work, and their importance. I will be using a tool called wireshark. A wireshark is a tool through which we can analyze a network traffic, and understand  how devices communicate  and what protocols are being used and what kind of information we are looking at. 
+This repository documents core networking concepts, protocol behaviors, and communication patterns observed by capturing live network traffic using **Wireshark**.
 
 ---
 
-# Capture traffic 
+Documentation of some basic networking fundamentals, how they work, why they work, and their importance. I will be using a tool called wireshark. Wireshark is a tool through which we can analyze a network traffic, and understand  how devices communicate  and what protocols are being used and what kind of information we are looking at.  
+
+---
+
+## 1. Capture Basic ICMP traffic ('ping') 
 
 To capture traffic, i will use ping command. The purpose of ping command is to check whether a source is reachable or not. It sends packet in a sequence and the time for each packets. A packet is the data that is chopped into smaller version so its easier for the data to flow. 
 
@@ -16,21 +20,23 @@ After running the command, we can see in wireshark and analyze what exactly happ
 
 <img width="1204" height="368" alt="Screenshot 2026-10-03 191435" src="https://github.com/user-attachments/assets/dee7d2b7-c479-46be-9333-75ad583e3d9b" />
 
-The 8.8.8.8 is a public free DNS ***(Domain name system. This server takes the human-readable name of a website (e.g google.com) and converts it into IP as computers can't read human-readable language)*** The ICMP protocol is specfically used in ping command its also used for errors. We checked whether the host is reachable. The packets are sent in a sequence with there respective time to live ***for how long a packet is available*** and bytes is the size of the packet. 
+The 8.8.8.8 is a public free DNS ***(Domain name system. This server takes the human-readable name of a website (e.g google.com) and converts it into IP as computers can't read human-readable language)*** The ICMP protocol is specfically used in ping command its also used for errors. We checked whether the host is reachable. The packets are sent in a sequence with there respective time to live ***TTL in IPv4 is actually a hop count limit (decremented by 1 at each router). It prevents packets from looping infinitely in a network loop.*** and bytes is the size of the packet. 
 
 ---
 
-# ARP protocol 
+## 2. Address Resolution Protocol (ARP) 
 
-We also see an ARP protocol. ARP stands for Address Resolution protocol whose jobs is to find the MAC address of an IP address. It sends a request asking whats the MAC address of a particular IP and then recieves a response. 
+Before devices can communicate over a local Ethernet network, Layer 3 IP addresses must be mapped to Layer 2 physical hardware (MAC) addresses.
 
 <img width="1321" height="127" alt="Screenshot 2026-10-03 192105" src="https://github.com/user-attachments/assets/f47c059d-e9c7-40a3-93b0-caf173aea338" />
 
-In the picture, 10.0.2.2 is the router which is the default gateway ***the default gateway helps us communicate with the outside network*** 10.0.2.15 which is my device is asking for the MAC address of the router and we can clearly see the response we recieved by the router. 
+In this capture:
+* 10.0.2.2 is the router which is the default gateway ***the default gateway helps us communicate with the outside network***
+* 10.0.2.15 which is my device is asking for the MAC address of the router and we can clearly see the response we recieved by the router. 
 
 ---
 
-# Capturing traffic when opening a browser 
+## 3. Web Browser Network Initialization 
 
 Now, we will capture what exactly happens when we open a browser. I will run firefox and see how the browser communicates with my device on the network. 
 
@@ -38,17 +44,19 @@ Now, we will capture what exactly happens when we open a browser. I will run fir
 
 The moment i opened the browser, flood of traffic can be seen. The two most common protocols that occured were DNS and TCP. What exactly are those two protocols and what's their purpose? 
 
-#DNS DOMAIN NAME SYSTEM 
+### A. Domain Name System (DNS)
 
 Before your system can send data to a website or background service, it needs to find its destination's IP address. My device asked the router whats the IP address of ads.mozilla.org and then we recieved the standard the query response 
 
 <img width="1292" height="785" alt="Screenshot 2026-10-03 193806" src="https://github.com/user-attachments/assets/427bacb9-5ed7-433c-88e2-f7f9cfccf70d" />
 
-#TCP TRANSMISSION CONTROL PROTOCOL
+### B. Transmission Control Protocol (TCP)
 
 A TCP protocol transfers data from one device to another. The TCP is efficient as it rechecks if the packet was lost during the transmission and requests for the packet again. A TCP handshake which is also known as three-way handshake is when the source asks the destination if its there the destination replies and then they exchange a conversation using SYN and ACK. SYN and ACK are control flags used in the TCP 3-Way Handshake Process to set up a reliable connection between a sender and a receive. 
-* Synchronize means the client wants to talk to the server.
-* Acknowledge means that it Acknowledged the client request and is ready to talk
+Before sending data, TCP establishes a connection using the **3-Way Handshake**:
+1. **SYN (Synchronize):** Client requests a connection to the server on port 443.
+2. **SYN-ACK (Synchronize-Acknowledge):** Server acknowledges the client's request and agrees to open a connection.
+3. **ACK (Acknowledge):** Client confirms server response. The session is now open for data exchange.
 
 <img width="1270" height="535" alt="Screenshot 2026-10-03 203441" src="https://github.com/user-attachments/assets/ab9f39fc-cb59-40c3-b153-eaee06ef672e" />
 
