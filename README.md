@@ -46,9 +46,14 @@ The moment i opened the browser, flood of traffic can be seen. The two most comm
 
 ### A. Domain Name System (DNS)
 
-Before your system can send data to a website or background service, it needs to find its destination's IP address. My device asked the router whats the IP address of ads.mozilla.org and then we recieved the standard the query response 
+Computers communicate using IP addresses, but humans use domain names. DNS acts as the "phonebook" of the internet to resolve human-readable names to IP addresses.
 
 <img width="1292" height="785" alt="Screenshot 2026-10-03 193806" src="https://github.com/user-attachments/assets/427bacb9-5ed7-433c-88e2-f7f9cfccf70d" />
+
+1. **Query:** Host (`10.0.2.15`) queries DNS server (`192.168.1.1`) for IPv4 (`A`) and IPv6 (`AAAA`) records of `ads.mozilla.org`.
+2. **Response:** The DNS server replies with the mapped IP address / CDN canonical name (CNAME).
+
+---
 
 ### B. Transmission Control Protocol (TCP)
 
