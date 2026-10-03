@@ -1,9 +1,11 @@
 # Networking-basics
+
 I will be documenting some basic networking fundamentals, how they work, why they work, and their importance. I will be using a tool called wireshark. A wireshark is a tool through which we can analyze a network traffic, and understand  how devices communicate  and what protocols are being used and what kind of information we are looking at. 
 
 ---
 
 # Capture traffic 
+
 To capture traffic, i will use ping command. The purpose of ping command is to check whether a source is reachable or not. It sends packet in a sequence and the time for each packets. A packet is the data that is chopped into smaller version so its easier for the data to flow. 
 
 <img width="549" height="284" alt="Screenshot 2026-10-03 191424" src="https://github.com/user-attachments/assets/833753e2-fcef-4789-b7c9-defd974f74cc" />
@@ -19,6 +21,7 @@ The 8.8.8.8 is a public free DNS ***(Domain name system. This server takes the h
 ---
 
 # ARP protocol 
+
 We also see an ARP protocol. ARP stands for Address Resolution protocol whose jobs is to find the MAC address of an IP address. It sends a request asking whats the MAC address of a particular IP and then recieves a response. 
 
 <img width="1321" height="127" alt="Screenshot 2026-10-03 192105" src="https://github.com/user-attachments/assets/f47c059d-e9c7-40a3-93b0-caf173aea338" />
@@ -28,18 +31,40 @@ In the picture, 10.0.2.2 is the router which is the default gateway ***the defau
 ---
 
 # Capturing traffic when opening a browser 
+
 Now, we will capture what exactly happens when we open a browser. I will run firefox and see how the browser communicates with my device on the network. 
 
 <img width="1285" height="850" alt="Screenshot 2026-10-03 192923" src="https://github.com/user-attachments/assets/af2c1a32-4a91-40d7-9a46-33e9d615f212" />
 
 The moment i opened the browser, flood of traffic can be seen. The two most common protocols that occured were DNS and TCP. What exactly are those two protocols and what's their purpose? 
 
-##DNS DOMAIN NAME SYSTEM 
+#DNS DOMAIN NAME SYSTEM 
+
 Before your system can send data to a website or background service, it needs to find its destination's IP address. My device asked the router whats the IP address of ads.mozilla.org and then we recieved the standard the query response 
 
 <img width="1292" height="785" alt="Screenshot 2026-10-03 193806" src="https://github.com/user-attachments/assets/427bacb9-5ed7-433c-88e2-f7f9cfccf70d" />
 
-##TCP TRANSMISSION CONTROL PROTOCOL 
+#TCP TRANSMISSION CONTROL PROTOCOL
+
+A TCP protocol transfers data from one device to another. The TCP is efficient as it rechecks if the packet was lost during the transmission and requests for the packet again. A TCP handshake which is also known as three-way handshake is when the source asks the destination if its there the destination replies and then they exchange a conversation using SYN and ACK. SYN and ACK are control flags used in the TCP 3-Way Handshake Process to set up a reliable connection between a sender and a receive. 
+* Synchronize means the client wants to talk to the server.
+* Acknowledge means that it Acknowledged the client request and is ready to talk
+
+<img width="1270" height="535" alt="Screenshot 2026-10-03 203441" src="https://github.com/user-attachments/assets/ab9f39fc-cb59-40c3-b153-eaee06ef672e" />
+
+---
+
+# TLS (Transport Layer Security)
+
+TCP provides reliable communication, but data is sent in plain text. TLS runs on top of TCP to provide privacy and data integrity through encryption.
+
+During the TLS handshake:
+1. **Authentication:** The web server sends its Digital Certificate to the browser (client) to prove its identity.
+2. **Key Exchange:** The browser verifies the server's certificate and exchanges cryptographic key parameters (`Client Key Exchange`) with the server.
+3. **Encryption:** Both client and server use these shared parameters to derive a symmetric session key. All subsequent web data (`Application Data`) is encrypted using this key.
+
+<img width="1162" height="221" alt="Screenshot 2026-10-03 204512" src="https://github.com/user-attachments/assets/d1139e3b-54c4-4b71-beaf-93a2b32f2c97" />
+
 
 
 
