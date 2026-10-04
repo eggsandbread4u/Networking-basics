@@ -67,7 +67,7 @@ Before sending data, TCP establishes a connection using the **3-Way Handshake**:
 
 ---
 
-# TLS (Transport Layer Security)
+## 3. TLS (Transport Layer Security)
 
 TCP provides reliable communication, but data is sent in plain text. TLS runs on top of TCP to provide privacy and data integrity through encryption.
 
@@ -77,6 +77,33 @@ During the TLS handshake:
 3. **Encryption:** Both client and server use these shared parameters to derive a symmetric session key. All subsequent web data (`Application Data`) is encrypted using this key.
 
 <img width="1162" height="221" alt="Screenshot 2026-10-03 204512" src="https://github.com/user-attachments/assets/d1139e3b-54c4-4b71-beaf-93a2b32f2c97" />
+
+---
+
+## 4. Traffic analysis on a HTTP website
+
+A HTTP website is not secure. It's content isn't encrypted rather exposed therefore TLS is necessary. To start firstly we will go on a website that is HTTP and then analyize it on wireshark
+
+## A. Analyzing on wireshark
+We see HTTPS status code and GET. 
+* GET is designed to retrieve data from a server
+* POST is designed to send data to a server to create or modify a resource
+HTTPS status code tells us if a website or it's server is working.
+1. **200-299**: success
+2. **300-399**: Client request redirected to another server
+3. **400-499**: error with the client request
+4. **500-599**: server error
+
+We can clearly see the content of this website by picking a HTTP stream. 
+
+<img width="848" height="643" alt="Screenshot 2026-10-04 101323" src="https://github.com/user-attachments/assets/7b139d26-be79-48c3-882b-170521893608" />
+
+
+
+
+
+
+
 
 
 
