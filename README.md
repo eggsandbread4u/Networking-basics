@@ -80,24 +80,28 @@ During the TLS handshake:
 
 ---
 
-## 4. Traffic analysis on a HTTP website
+## 4. DHCP (Dynamic Host Configuration Protocol): 
 
-A HTTP website is not secure. It's content isn't encrypted rather exposed therefore TLS is necessary. To start firstly we will go on a website that is HTTP and then analyize it on wireshark
+DHCP assigns IP addresses to devices automatically when a device is connected on the internet so it can communicate. 
+* DHCP can be inside a router or a separate server. It works by using a **DORA** method
+A DORA method: it stands for discover,offer,request, and acknowledge. 
+1. Discover: The device sends a broadcast message that it needs an IP address. The DHCP server **Discovers** the request
+2. Offer: The server then **offers** an IP address to the device.
+3. Request: If there are multiple DHCP servers, The device **request** for IP from one of the servers
+4. Acknowledge: The servers then assigns the IP address to the device.
 
-## A. Analyzing on wireshark
-We see HTTPS status code and GET. 
-* GET is designed to retrieve data from a server
-* POST is designed to send data to a server to create or modify a resource
-HTTPS status code tells us if a website or it's server is working.
-1. **200-299**: success
-2. **300-399**: Client request redirected to another server
-3. **400-499**: error with the client request
-4. **500-599**: server error
+We will analyze the DORA method on wireshark by releasing the current IP address and then requesting for one. 
 
-We can clearly see the content of this website by picking a HTTP stream. 
+<img width="340" height="148" alt="Screenshot 2026-10-07 173727" src="https://github.com/user-attachments/assets/f3ace758-b849-49c6-a5a1-6f203bb403cd" />
 
-<img width="848" height="643" alt="Screenshot 2026-10-04 101323" src="https://github.com/user-attachments/assets/7b139d26-be79-48c3-882b-170521893608" />
+we first disconnected the device from the internet and the reconnected using command `nmcli` 
 
+<img width="1218" height="247" alt="Screenshot 2026-10-07 174131" src="https://github.com/user-attachments/assets/32a57fcb-3026-4744-bfa3-f21be9b4fb19" />
+
+Only two steps (`Request`, `Acknowledge`) were followed because the DHCP server assigned the previous IP address so there was no need for the discovery and request part. 
+
+ 
+    
 
 
 
