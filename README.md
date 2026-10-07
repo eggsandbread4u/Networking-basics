@@ -84,6 +84,7 @@ During the TLS handshake:
 
 DHCP assigns IP addresses to devices automatically when a device is connected on the internet so it can communicate. 
 * DHCP can be inside a router or a separate server. It works by using a **DORA** method
+  
 A DORA method: it stands for discover,offer,request, and acknowledge. 
 1. Discover: The device sends a broadcast message that it needs an IP address. The DHCP server **Discovers** the request
 2. Offer: The server then **offers** an IP address to the device.
